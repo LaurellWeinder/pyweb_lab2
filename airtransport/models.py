@@ -42,14 +42,14 @@ class Aircrafts(models.Model):
 class Flights(models.Model):
     flight_id = models.PositiveIntegerField(primary_key=True)
     flight_no = models.CharField(max_length=10)
-    scheduled_departure = models.TimeField()
-    scheduled_arrival = models.TimeField()
+    scheduled_departure = models.DateTimeField()
+    scheduled_arrival = models.DateTimeField()
     departure_airport = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='departure_airport')
     arrival_airport = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='arrival_airport')
     status = models.CharField(max_length=100)
     aircraft_code = models.ForeignKey(Aircrafts, on_delete=models.CASCADE)
-    actual_departure = models.TimeField(default=scheduled_departure)
-    actual_arrival = models.TimeField(default=scheduled_arrival)
+    actual_departure = models.DateTimeField(default=scheduled_departure)
+    actual_arrival = models.DateTimeField(default=scheduled_arrival)
 
     def __str__(self):
         return f'Flight {self.flight_no} from {self.departure_airport} to {self.arrival_airport} at {self.scheduled_departure}'
